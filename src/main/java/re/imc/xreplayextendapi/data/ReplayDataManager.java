@@ -47,8 +47,8 @@ public class ReplayDataManager {
             TableUtils.createTableIfNotExists(connection, ReplayMetadata.class);
             replayMetadataDao = DaoManager.createDao(connection, ReplayMetadata.class);
 
-            if (XReplayExtendAPI.getInstance().isEnableReplayDeleteEvent()) {
-                startDeleteCheck(XReplayExtendAPI.getInstance().getDeleteCheckInterval());
+            if (api.isEnableReplayDeleteEvent()) {
+                startDeleteCheck(api.getDeleteCheckInterval());
             }
         }
     }
