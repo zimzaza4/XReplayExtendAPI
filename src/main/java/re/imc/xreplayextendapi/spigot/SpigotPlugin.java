@@ -27,7 +27,7 @@ public class SpigotPlugin extends JavaPlugin {
     private static SpigotPlugin instance;
 
     @Getter
-    private static Set<String> saveWithMetadataRecords = Sets.newConcurrentHashSet();
+    private static final Set<String> saveWithMetadataRecords = Sets.newConcurrentHashSet();
     @Getter
     @Setter
     private BiConsumer<Player, String> replayAction = (player, replayId) -> {

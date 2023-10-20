@@ -1,5 +1,5 @@
 name: XReplayExtendAPI
 version: '${project.version}'
-main: re.imc.xreplayextendapi.XReplayExtendAPI
+main: re.imc.xreplayextendapi.spigot.SpigotPlugin
 softdepend:
   - ReplaySystem

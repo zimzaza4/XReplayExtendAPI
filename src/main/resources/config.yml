@@ -5,7 +5,7 @@ database:
   password: 123456
   connection-parameters: "?autoReconnect=true&initialTimeout=1&useSSL=false"
 
-replay-metadata: true
+replay-metadata: true # to use metadata api, you have to install this api in each record/replay server
 
 replay-delete-event: true # require enable replay-metadata
 delete-check-interval: 60 # min
