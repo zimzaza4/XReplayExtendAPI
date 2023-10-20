@@ -38,7 +38,7 @@ public class SpigotPlugin extends JavaPlugin {
     @Getter
     private XReplayHolder xReplayHolder;
     @Override
-    public void onLoad() {
+    public void onEnable() {
         instance = this;
         saveDefaultConfig();
         File configFile = new File(getDataFolder(), "config.yml");
