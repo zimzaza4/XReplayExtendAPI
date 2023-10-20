@@ -1,0 +1,5 @@
+name: XReplayExtendAPI
+version: '${project.version}'
+main: re.imc.xreplayextendapi.XReplayExtendAPI
+softdepend:
+  - ReplaySystem

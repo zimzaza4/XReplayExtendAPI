@@ -1,0 +1,11 @@
+database:
+  hostname: localhost:3306
+  database: replaysystem_db
+  user: replaysystem_user
+  password: 123456
+  connection-parameters: "?autoReconnect=true&initialTimeout=1&useSSL=false"
+
+replay-metadata: true
+
+replay-delete-event: true # require enable replay-metadata
+delete-check-interval: 60 # min
