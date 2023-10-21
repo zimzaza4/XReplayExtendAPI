@@ -9,7 +9,7 @@ import org.bukkit.event.HandlerList;
 public class ReplayDeleteEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
 
-    private String replayId;
+    private final String replayId;
 
     public ReplayDeleteEvent(String replayId) {
         super(true);

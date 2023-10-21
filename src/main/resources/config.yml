@@ -7,5 +7,5 @@ database:
 
 replay-metadata: true # to use metadata api, you have to install this api in each record/replay server
 
-replay-delete-event: true # require enable replay-metadata
+replay-delete-event: false # require enable replay-metadata
 delete-check-interval: 60 # min

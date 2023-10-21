@@ -1,6 +1,5 @@
 package re.imc.xreplayextendapi.spigot;
 
-import com.google.gson.JsonObject;
 import de.musterbukkit.replaysystem.main.ReplayAPI;
 import org.bukkit.entity.Player;
 import re.imc.xreplayextendapi.XReplayExtendAPI;
@@ -49,5 +48,10 @@ public class XReplayHolder {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public String getReplayId() {
+
+        return ReplayAPI.getReplayID();
     }
 }
