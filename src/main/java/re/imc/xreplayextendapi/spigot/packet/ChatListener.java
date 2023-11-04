@@ -21,7 +21,6 @@ public class ChatListener extends PacketAdapter {
     @Override
     public void onPacketSending(PacketEvent event) {
 
-        System.out.println("BASE");
         StructureModifier<BaseComponent> modifier = event.getPacket().getSpecificModifier(BaseComponent.class);
 
         String fullMsg = "";
@@ -63,7 +62,6 @@ public class ChatListener extends PacketAdapter {
 
         String[] values = fullMsg.split("::", 4);
 
-        System.out.println(Arrays.toString(values));
         if (values.length < 4) {
             return;
         }
