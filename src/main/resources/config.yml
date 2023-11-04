@@ -9,3 +9,4 @@ replay-metadata: true # to use metadata api, you have to install this api in eac
 
 replay-delete-event: false # require enable replay-metadata
 delete-check-interval: 60 # min
+replay-server: false

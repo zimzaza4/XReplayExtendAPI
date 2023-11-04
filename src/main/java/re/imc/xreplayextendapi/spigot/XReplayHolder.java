@@ -54,4 +54,8 @@ public class XReplayHolder {
 
         return ReplayAPI.getReplayID();
     }
+
+    public void addMessage(String msg) {
+        ReplayAPI.addMessage(msg);
+    }
 }

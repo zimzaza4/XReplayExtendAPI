@@ -2,6 +2,8 @@ package re.imc.xreplayextendapi;
 
 import lombok.Getter;
 import org.bukkit.entity.Player;
+import re.imc.xreplayextendapi.custom.CustomRecordManager;
+import re.imc.xreplayextendapi.custom.record.CustomRecord;
 import re.imc.xreplayextendapi.data.ReplayDataManager;
 import re.imc.xreplayextendapi.data.model.ReplayMetadata;
 import re.imc.xreplayextendapi.data.model.ReplayWaitForPlay;
@@ -22,21 +24,28 @@ public class XReplayExtendAPI {
 
     private final ReplayDataManager replayDataManager;
 
+    private CustomRecordManager customRecordManager;
+
     private boolean enableMetadata;
 
     private boolean enableReplayDeleteEvent = false;
 
     private int deleteCheckInterval = 10000;
 
+    private boolean replayServer = false;
+
     private final List<Consumer<String>> replayDeleteHandlers = new ArrayList<>();
 
 
     public XReplayExtendAPI(Map<Object, Object> config, boolean standalone) {
 
+        replayServer = (boolean) config.get("replay-server");
         enableMetadata = (boolean) config.get("replay-metadata");
         if (!standalone) {
             enableReplayDeleteEvent = (boolean) config.get("replay-delete-event");
             deleteCheckInterval = (int) config.get("delete-check-interval");
+            customRecordManager = new CustomRecordManager();
+            customRecordManager.init();
         }
         try {
             replayDataManager = new ReplayDataManager();
@@ -68,6 +77,17 @@ public class XReplayExtendAPI {
         SpigotPlugin.getInstance().getXReplayHolder().createPlayerSnapshotWithMetadata(seconds, player, metadata);
     }
 
+    public void addCustomRecord(String id, CustomRecord record) {
+        addCustomRecord(id, record, "");
+    }
+    public void addCustomRecord(String id, CustomRecord record, String permission) {
+        StringBuilder data = new StringBuilder("REPLAY_RECORD::");
+        data.append(id)
+             .append("::")
+             .append(permission)
+             .append("::");
+        SpigotPlugin.getInstance().getXReplayHolder().addMessage(data.append(record.serialize()).toString());
+    }
 
 
 }

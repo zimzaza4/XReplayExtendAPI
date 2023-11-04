@@ -3,3 +3,5 @@ version: '${project.version}'
 main: re.imc.xreplayextendapi.spigot.SpigotPlugin
 loadbefore:
   - ReplaySystem
+depend:
+  - ProtocolLib

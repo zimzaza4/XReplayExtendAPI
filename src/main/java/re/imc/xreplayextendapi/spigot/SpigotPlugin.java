@@ -1,5 +1,7 @@
 package re.imc.xreplayextendapi.spigot;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
 import com.google.common.collect.Sets;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +19,7 @@ import re.imc.xreplayextendapi.data.model.ReplayMetadata;
 import re.imc.xreplayextendapi.spigot.events.ReplayDeleteEvent;
 import re.imc.xreplayextendapi.spigot.listener.PlayerListener;
 import re.imc.xreplayextendapi.spigot.listener.ReplayListener;
+import re.imc.xreplayextendapi.spigot.packet.ChatListener;
 
 import java.io.File;
 import java.io.FileReader;
@@ -82,7 +85,13 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         xReplayHolder = new XReplayHolder();
         Bukkit.getPluginManager().registerEvents(new ReplayListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-
+        if (XReplayExtendAPI.getInstance().isReplayServer()) {
+            if (PacketType.Play.Server.SYSTEM_CHAT.isSupported()) {
+                ProtocolLibrary.getProtocolManager().addPacketListener(new ChatListener(this, PacketType.Play.Server.SYSTEM_CHAT));
+            } else {
+                ProtocolLibrary.getProtocolManager().addPacketListener(new ChatListener(this, PacketType.Play.Server.CHAT));
+            }
+        }
         replayPluginInstalled = true;
     }
 
@@ -100,6 +109,7 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
                 throw new RuntimeException(e);
             }
         }
+
     }
 
 

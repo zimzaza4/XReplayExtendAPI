@@ -22,7 +22,6 @@ public class PlayerListener implements Listener {
 
             try {
                 ReplayWaitForPlay data = dataManager.getReplayWaitForPlayDao().queryForId(String.valueOf(event.getPlayer().getUniqueId()));
-
                 if (data != null) {
                     dataManager.getReplayWaitForPlayDao().delete(data);
                 }
@@ -31,16 +30,17 @@ public class PlayerListener implements Listener {
 
             }
             return null;
-        }).thenAccept(data -> {
+        }).whenCompleteAsync((data, error) -> {
             if (data == null) {
                 return;
             }
+            if (error != null) error.printStackTrace();
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     SpigotPlugin.getInstance().getReplayAction().accept(event.getPlayer(), data.getReplay());
                 }
-            }.runTask(SpigotPlugin.getInstance());
+            }.runTaskLater(SpigotPlugin.getInstance(), 20);
 
         });
 
