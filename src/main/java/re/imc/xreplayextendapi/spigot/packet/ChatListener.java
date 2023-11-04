@@ -70,14 +70,16 @@ public class ChatListener extends PacketAdapter {
         String data = values[3];
 
         try {
-            if (!event.getPlayer().hasPermission(permission)) {
-                return;
+            if (!permission.equals("")) {
+                if (!event.getPlayer().hasPermission(permission)) {
+                    return;
+                }
             }
             XReplayExtendAPI.getInstance().getCustomRecordManager().getType(id).getDeclaredConstructor(String.class).newInstance(data)
                     .execute(event.getPlayer());
 
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
