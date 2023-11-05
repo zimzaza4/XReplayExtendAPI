@@ -86,10 +86,10 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new ReplayListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         if (XReplayExtendAPI.getInstance().isReplayServer()) {
-            if (PacketType.Play.Server.SYSTEM_CHAT.isSupported()) {
-                ProtocolLibrary.getProtocolManager().addPacketListener(new ChatListener(this, PacketType.Play.Server.SYSTEM_CHAT));
-            } else {
+            if (PacketType.Play.Server.CHAT.isSupported()) {
                 ProtocolLibrary.getProtocolManager().addPacketListener(new ChatListener(this, PacketType.Play.Server.CHAT));
+            } else {
+                ProtocolLibrary.getProtocolManager().addPacketListener(new ChatListener(this, PacketType.Play.Server.SYSTEM_CHAT));
             }
         }
         replayPluginInstalled = true;

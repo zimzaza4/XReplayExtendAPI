@@ -31,9 +31,15 @@ public class ChatListener extends PacketAdapter {
             StructureModifier<BaseComponent[]> spigotModifier = event.getPacket().getSpecificModifier(BaseComponent[].class);
             StringBuilder builder = new StringBuilder();
             BaseComponent[] components = spigotModifier.readSafely(0);
-            if (components == null) {
+            if (components == null || components.length == 0) {
+                StructureModifier<WrappedChatComponent> componentModifier = event.getPacket().getChatComponents();
+                components =  ComponentConverter.fromWrapper(componentModifier.read(0));
+            }
+
+            if (components == null || components.length == 0) {
                 return;
             }
+
             boolean first = true;
             for (BaseComponent component : components) {
                 if (first) {
@@ -70,7 +76,7 @@ public class ChatListener extends PacketAdapter {
         String data = values[3];
 
         try {
-            if (!permission.equals("")) {
+            if (!permission.isEmpty()) {
                 if (!event.getPlayer().hasPermission(permission)) {
                     return;
                 }
